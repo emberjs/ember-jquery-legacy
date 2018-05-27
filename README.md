@@ -1,7 +1,10 @@
 ember-jquery-legacy
 ==============================================================================
 
-[Short description of the addon.]
+Provides a helper function as specified in [RFC294](https://github.com/emberjs/rfcs/blob/master/text/0294-optional-jquery.md#introducing-ember-jquery-legacy-and-deprecating-jqueryevent-usage),
+that receives either a [jQuery.Event API](https://api.jquery.com/category/events/event-object/) instance 
+(when Ember is running with its jQuery integration enabled) or a native event (no jQuery), and will return a 
+native event without triggering any deprecations. 
 
 Installation
 ------------------------------------------------------------------------------
@@ -14,8 +17,38 @@ ember install ember-jquery-legacy
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+As part of the effort to decouple Ember from jQuery, using event object APIs that are specific to `jQuery.Event` such as
+`originalEvent` are deprecated. Especially addons are urged to not use any jQuery specific APIs, so they are able to
+work in a world without jQuery.
 
+Unfortunatly not all native event properties are available directly on an `jQuery.Event` instance. See the
+[jQuery.Event API](https://api.jquery.com/category/events/event-object/) for details.
+
+For those other properties it was necessary to get access to the native event object through `originalEvent`. 
+To prevent your code from being coupled to jQuery in this way, use the `normalizeEvent` function provided by this addon, 
+which will work with our without jQuery to provide the native event without triggering any deprecations.
+
+Before:
+
+```javascript
+// your event handler:
+click(event) {
+  let nativeEvent = event.originalEvent;
+  ...
+}
+```
+
+After:
+
+```javascript
+import { normalizeEvent } from 'ember-jquery-legacy';
+
+// your event handler:
+click(event) {
+  let nativeEvent = normalizeEvent(event);
+  ...
+}
+```
 
 Contributing
 ------------------------------------------------------------------------------
