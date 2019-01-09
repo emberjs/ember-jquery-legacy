@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@ember/jquery@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@ember/jquery/-/jquery-0.5.1.tgz#2193aea8f9330a6de6a4fd7943c860b54a300609"
+"@ember/jquery@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@ember/jquery/-/jquery-0.5.2.tgz#fe312c03ada0022fa092d23f7cd7e2eb0374b53a"
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.6.0"
